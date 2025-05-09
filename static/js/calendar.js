@@ -11,7 +11,7 @@
   let events = [];
 
   const SOURCE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-ZZ5igNAgYF2aDKkvNqmY1ia5yv2RMDymvD3qvAJzzVPU5oVoFepzDHva8y6BJWPlkrbrJNKmPlK8/pub?gid=1419688078&single=true&output=csv';
-  const FIELDS = ['title', 'start', 'end', 'intro', 'url', 'categories', 'ageStart', 'ageEnd', 'source'];
+  const FIELDS = ['title', 'start', 'end', 'intro', 'url', 'seq', 'categories', 'ageStart', 'ageEnd', 'source', 'color1', 'color2'];
 
   prevMonthButton.onclick = (e) => { changeMonth(-1) };
   nextMonthButton.onclick = (e) => { changeMonth(1) };
@@ -52,6 +52,10 @@
           const ev = document.createElement('div');
           ev.className = 'event';
           ev.textContent = event.title;
+          if (event.color1 && event.color2) {
+            ev.style.background = `#${event.color2}`;
+            ev.style.borderLeftColor = `#${event.color1}`;
+          }
           cell.appendChild(ev);
         }
       });
