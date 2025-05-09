@@ -1,17 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>父母救星 - 月曆</title>
+  <link href="./static/vendor/w2ui-2.0.min.css" rel="stylesheet" />
   <style>
    body { font-family: sans-serif; padding: 20px; }
-    .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 10px; }
-    .day { border: 1px solid #ccc; min-height: 80px; padding: 5px; }
-    .header { font-weight: bold; background: #eee; text-align: center; }
-    .event { background: #e0f7fa; margin-top: 4px; padding: 2px 4px; font-size: 0.9em; border-left: 3px solid #00796b; }
-    .nav { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
-    button { padding: 4px 8px; }
+   .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 10px; }
+   .day { border: 1px solid #ccc; min-height: 80px; padding: 5px; }
+   .header { font-weight: bold; background: #eee; text-align: center; }
+   .event { background: #e0f7fa; margin-top: 4px; padding: 2px 4px; font-size: 0.9em; border-left: 3px solid #00796b; }
+   .nav { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
+   button { padding: 4px 8px; }
+   dt {
+     font-weight: bold;
+   }
+   dl, dd {
+     font-size: 0.9rem;
+   }
+   dd {
+     margin-bottom: 1em;
+   }
+   .w2ui-grid .w2ui-grid-body table td.w2ui-grid-data > div {
+     white-space: normal !important;
+     text-overflow: clip !important;
+     overflow: visible !important;
+      height: auto !important;
+   }
   </style>
 </head>
 <body>
@@ -29,7 +45,7 @@
     <img src="./static/img/parents-summer-break.jpeg" height="200"/>
     <div>via: https://www.digitalmomblog.com/summer-memes/</div>
   </div>
-  
+  <script src="./static/vendor/w2ui-2.0.min.js"></script>
   <script src="./static/js/calendar.js"></script>
 </body>
 </html>
