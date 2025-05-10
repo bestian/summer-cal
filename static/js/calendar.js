@@ -259,12 +259,14 @@
       return response.text(); // CSV is plain text
     })
     .then(csvText => {
+      alert(csvText);
       events = parseCSV(csvText);
       console.log(events);
       alert(events.length);
       renderCalendar();
     })
     .catch(error => {
+      alert(error);
       console.error('Fetch error:', error);
     });
 
