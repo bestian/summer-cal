@@ -46,9 +46,11 @@
       cell.innerHTML = `<strong>${d}</strong>`;
 
       events.forEach(event => {
-        //const start = new Date(`${event.start} 00:00:00 GMT+0800`);
+        const start1 = new Date(`${event.start} 00:00:00 GMT+0800`);
+        alert(start1);
         //const end = new Date(`${event.end} 00:00:00 GMT+0800`);
         const start = new Date(`${event.start}`);
+        alert(start);
         const end = new Date(`${event.end}`);
         if (cellDate >= start && cellDate <= end) {
           const ev = document.createElement('div');
