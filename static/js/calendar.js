@@ -46,21 +46,26 @@
       cell.innerHTML = `<strong>${d}</strong>`;
 
       events.forEach(event => {
-        const start1 = new Date(`${event.start} 00:00:00 GMT+0800`);
-        alert(start1);
+        //const start = new Date(`${event.start} 00:00:00 GMT+0800`);
         //const end = new Date(`${event.end} 00:00:00 GMT+0800`);
-        const start = new Date(`${event.start}`);
-        alert(start);
-        const end = new Date(`${event.end}`);
-        if (cellDate >= start && cellDate <= end) {
-          const ev = document.createElement('div');
-          ev.className = 'event';
-          ev.textContent = `${event.group}::${event.title}`;
-          const hue = (event.group) ? stringToHue(event.group) : Math.random() * 360;
-          ev.style.background = `hsl(${hue} 80% 80% / 50%)`;
-          ev.style.borderLeftColor = `hsl(${hue} 80% 40% / 60%)`;
-          ev.onclick = (e) => { handleClickDetail(e, event) };
-          cell.appendChild(ev);
+        // date cannot parse in mobile
+        const startList = event.start.split('-');
+        const endList = event.end.split('-');
+        if (startList.length == 3 && endList.length == 3) {
+          const start = new Date(startList[0], startList[1]-1, startList[2]);
+          const end = new Date(endList[0], endList[1]-1, endList[2]);
+          if (cellDate >= start && cellDate <= end) {
+            const ev = document.createElement('div');
+            ev.className = 'event';
+            ev.textContent = `${event.group}::${event.title}`;
+            const hue = (event.group) ? stringToHue(event.group) : Math.random() * 360;
+            ev.style.background = `hsl(${hue} 80% 80% / 50%)`;
+            ev.style.borderLeftColor = `hsl(${hue} 80% 40% / 60%)`;
+            ev.onclick = (e) => { handleClickDetail(e, event) };
+            cell.appendChild(ev);
+          }
+        } else {
+          console.error(`error date format: ${event.start}/${event.end}`);
         }
       });
 
