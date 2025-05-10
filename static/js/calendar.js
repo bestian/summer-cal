@@ -55,7 +55,7 @@
           const hue = (event.group) ? stringToHue(event.group) : Math.random() * 360;
           ev.style.background = `hsl(${hue} 80% 80% / 50%)`;
           ev.style.borderLeftColor = `hsl(${hue} 80% 40% / 60%)`;
-          ev.onclick = (e) => { handleClickDetail(e, event) };
+          //ev.onclick = (e) => { handleClickDetail(e, event) };
           cell.appendChild(ev);
         }
       });
@@ -148,6 +148,7 @@
     return hash % 361;
   }
 
+  /*
   function renderDetail(data) {
     let layout = new w2layout({
       name: 'layout',
@@ -226,7 +227,8 @@
 
     layout.html('main', grid2);
   }
-
+  */
+  /*
   function handleClickDetail(e, data) {
     //const title = (data.group === data.title) ? data.title : `${data.group} :: ${data.title}`;
     w2popup.open({
@@ -251,6 +253,7 @@
       }); // end of popup
 
   } // end of handleClickDetail
+  */
 
   // init, load csv
   fetch(SOURCE_URL)
