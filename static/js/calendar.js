@@ -164,7 +164,18 @@
       show: { header: true, columnHeaders: false },
       columns: [
         { field: 'name', text: 'Name', size: '100px', style: 'background-color: #efefef; border-bottom: 1px solid white; padding-right: 5px;', attr: "align=right" },
-        { field: 'value', text: 'Value', size: '100%', style: 'white-space: normal; height: auto;' }
+        { field: 'value', text: 'Value', size: '100%', style: 'white-space: normal; height: auto;',
+          render(record, extra) {
+            let fieldIndex = labels.findIndex( x => x === record.name);
+            if (fields[fieldIndex] === 'url' && record.value) {
+              return `<a href="${record.value}" target="_blank" title="Go!">${record.value}</a>`;
+            } else if (fields[fieldIndex] === 'source' && (record.value.indexOf('https://') >= 0) || record.value.indexOf('http://') >= 0) {
+              return `<a href="${record.value}" target="_blank" title="Go!">${record.value}</a>`;
+            }
+
+            return extra.value;
+          }
+        }
       ]
     });
 
