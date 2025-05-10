@@ -45,6 +45,8 @@
       cell.className = 'day';
       cell.innerHTML = `<strong>${d}</strong>`;
 
+      alert('render');
+      alert(events);
       events.forEach(event => {
         const start = new Date(`${event.start} 00:00:00 GMT+0800`);
         const end = new Date(`${event.end} 00:00:00 GMT+0800`);
@@ -259,7 +261,6 @@
       return response.text(); // CSV is plain text
     })
     .then(csvText => {
-      alert(csvText);
       events = parseCSV(csvText);
       console.log(events);
       alert(events.length);
