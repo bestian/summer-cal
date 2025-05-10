@@ -31,7 +31,7 @@
     const startDay = firstDay.getDay();
     const totalDays = lastDay.getDate();
     monthLabel.textContent = `${firstDay.toLocaleString('default', { month: 'long' })} ${currentYear}`;
- 
+
     const prePad = (startDay === 0) ? 6 : startDay - 1;
     for (let i = 0; i < prePad; i++) {
       calendarEl.appendChild(document.createElement('div'));
@@ -46,8 +46,8 @@
       cell.innerHTML = `<strong>${d}</strong>`;
 
       events.forEach(event => {
-        const start = new Date(event.start);
-        const end = new Date(event.end);
+        const start = new Date(`${event.start} 00:00:00 GMT+0800`);
+        const end = new Date(`${event.end} 00:00:00 GMT+0800`);
         if (cellDate >= start && cellDate <= end) {
           const ev = document.createElement('div');
           ev.className = 'event';
@@ -77,18 +77,57 @@
   }
 
   function parseCSV(text) {
-    const lines = text.trim().split('\n');
-    const [headerName, headerLabel, headerHelp, ...rows] = lines;
-    fields = headerName.split(',').map(h => h.trim());
-    labels = headerLabel.split(',').map(h => h.trim());
-    return rows.map(row => {
-      const values = row.split(',').map(v => v.trim());
-      let data = {};
-      values.forEach( (x, i) => {
-        data[fields[i]] = x;
-      });
-      return data;
-    });
+    const rows = [];
+    let row = [];
+    let value = '';
+    let insideQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const nextChar = text[i + 1];
+
+      if (insideQuotes) {
+        if (char === '"' && nextChar === '"') {
+          value += '"'; // Escaped quote
+          i++;
+        } else if (char === '"') {
+          insideQuotes = false;
+        } else {
+          value += char;
+        }
+      } else {
+        if (char === '"') {
+          insideQuotes = true;
+        } else if (char === ',') {
+          row.push(value);
+          value = '';
+        } else if (char === '\n') {
+          row.push(value);
+          rows.push(row);
+          row = [];
+          value = '';
+        } else if (char === '\r') {
+          // ignore \r (CRLF)
+        } else {
+          value += char;
+        }
+      }
+    }
+
+    // Push the last value
+    if (value || row.length > 0) {
+      row.push(value);
+      rows.push(row);
+    }
+
+    // Convert to objects using the first row as header
+    const [headerName, headerLabel, _, ...dataRows] = rows;
+    // to global variables
+    fields = headerName;
+    labels = headerLabel;
+    return dataRows.map(row =>
+      Object.fromEntries(headerName.map((h, i) => [h, row[i] || '']))
+    );
   }
 
   function stringToHue(str) {
@@ -210,6 +249,7 @@
     })
     .then(csvText => {
       events = parseCSV(csvText);
+      console.log(events);
       renderCalendar();
     })
     .catch(error => {
