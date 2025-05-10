@@ -45,11 +45,11 @@
       cell.className = 'day';
       cell.innerHTML = `<strong>${d}</strong>`;
 
-      alert('render');
-      alert(events);
       events.forEach(event => {
-        const start = new Date(`${event.start} 00:00:00 GMT+0800`);
-        const end = new Date(`${event.end} 00:00:00 GMT+0800`);
+        //const start = new Date(`${event.start} 00:00:00 GMT+0800`);
+        //const end = new Date(`${event.end} 00:00:00 GMT+0800`);
+        const start = new Date(`${event.start}`);
+        const end = new Date(`${event.end}`);
         if (cellDate >= start && cellDate <= end) {
           const ev = document.createElement('div');
           ev.className = 'event';
@@ -263,7 +263,6 @@
     .then(csvText => {
       events = parseCSV(csvText);
       console.log(events);
-      alert(events.length);
       renderCalendar();
     })
     .catch(error => {
