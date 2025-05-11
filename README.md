@@ -1,6 +1,6 @@
 # summer-cal
 
-summer-cal 是一個簡單的靜態網頁，主要資料從Google表單而來，用月曆的方式呈現，內容以暑期小孩營隊或課程為主，希望大家都可以方便看到最適合的營隊或課程。
+[父母救星 - 優質營隊月曆](https://moogoo78.github.io/summer-cal/) 是一個簡單的靜態網頁，主要資料從Google表單而來，用月曆的方式呈現，內容以暑期小孩營隊或課程為主，希望大家都可以方便看到最適合的營隊或課程。
 
 歡迎一起共同編輯 [Google 試算表](https://docs.google.com/spreadsheets/d/1AdMAE1buc3jZbdBgMyKzv0oND3qfW-my_yZAOgrG1hk/edit?hl=zh-tw&gid=1419688078#gid=1419688078) ([說明書 - HackMD](https://hackmd.io/@moogoo/Hk2en_oxee))
 
