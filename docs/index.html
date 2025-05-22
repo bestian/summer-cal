@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9Z362D12CM"></script>
+    <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'G-9Z362D12CM');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="/static/vendor/mvp.css" rel="stylesheet" />
+  </head>
+  <title>大營家 - 小孩營隊月曆::使用說明</title>
+  <body>
+    <main>
+      <h1>大營家 \(^_^)/ 小孩營隊月曆</h1>
+      <a href="/" target="_blank">goto 月曆</a>
+      <p>
+        💪 請大家一起提供優質營隊資訊，直接<a href="https://docs.google.com/spreadsheets/d/1AdMAE1buc3jZbdBgMyKzv0oND3qfW-my_yZAOgrG1hk/edit?hl=zh-tw&gid=1419688078#gid=1419688078" target="_blank">編輯表單</a>，結果就會馬上呈現在月曆上。<br/>
+      </p>
+
+      <article>
+        <h2>使用AI 幫忙整理</h2>
+        <p>進入任何一個AI服務，使用下列prompt提示句型:</p>
+        <pre>
+          <code>
+可以幫我把以下連結的內容整理成 csv 格式，欄位是:  title, start, end, intro, locality, ageStart, ageEnd, overnigt, price, url
+
+欄位說明:
+title: 活動標題
+start: 開始日期 (日期格式要 YYYY-MM-DD)
+end: 結束日期 (日期格式要 YYYY-MM-DD)
+intro: 簡介 (幾句話，複製原文內容，盡量不要自己產生)
+locality: 活動地點
+ageStart: 年級限制-最小 (暑假後幾年級開始算, 用數字表示, 沒限制就: 0, 成人的話就: 99)
+ageEnd: 年級限制-最大 (暑假後幾年級開始算, 用數字表示, 沒限制就: 0, 成人的話就: 99)
+overnight: 過夜 (Y=是, N=否)
+price: 費用
+url: 活動(報名)網址
+
+給我CSV格式就好，不用特別說明。
+
+--- 以下貼上給AI看的內容 ---
+https://好棒好棒的活動網址.com
+或是上傳檔案
+或是直接貼上文字
+          </code>
+        </pre>
+        <br>
+        <h2>不順利的案例</h2>
+        <div>
+          <details>
+            <summary>無法讀取網頁或報名表單連結</summary>
+            <p>AI出現: 我目前無法開啟你提供的 Google 表單連結（可能是因為表單設定為私人或出現伺服器錯誤）。你可以試著將該表單的內容（活動資訊）複製貼上到這裡，我就可以幫你整理成符合你格式需求的 CSV。你要不要貼一下內容？
+              <aside>
+                可能是AI的爬蟲程式被Google擋掉，可以把文字內容全選貼到AI對話框裡也是可以。
+              </aside>
+            </p>
+          </details>
+          <details>
+            <summary>複雜PDF表格</summary>
+            <p>
+              如這個 <a href="https://tam.gov.taipei/News_Content.aspx?n=794B17A953424610&sms=9D72E82EC16F3E64&s=5EBB7812993E7A19" target="_blank">臺北市立天文科學教育館-活動訊息-暑假天文營隊系列活動(報名由此進)</a> 活動，全部放在一個PDF表格，不同梯次跟日期還塞在同一個格子裡，例如國小低年級活動有一列，但是其實包含10個梯次，但這個真的難不倒AI，只要跟他說。
+              <aside>
+                日期那邊有不同梯次跟時間，幫我把不同梯次的活動分開列出，每個梯次作為單獨一列
+              </aside>
+            </p>
+          </details>
+          <br>
+          <h3>Google 試算表處理</h3>
+          <p>把AI產生出來的csv文字格式貼到Google表單</p>
+          <figure>
+            <img alt="sheet1" src="/static/img/sheet1.png">
+        <figcaption><i>可能會有不需要的標題，先刪掉</i></figcaption>
+          </figure>
+          <p>內容會都放在同一格，這時候就需要 "將文字分隔成不同欄"。</p>
+      <figure>
+        <img alt="sheet2" src="/static/img/sheet2.png">
+        <figcaption><i>多選要處理的資料列</i></figcaption>
+      </figure>
+      <br>
+      <figure>
+        <img alt="sheet3" src="/static/img/sheet3.png">
+        <figcaption><i>Google表單上方選單 "資料" -> "將文字分隔成不同欄"</i></figcaption>
+      </figure>
+      <p>分隔符要選 "自訂": <code>,</code> (英文的逗號，不是中文全形逗號)</p>
+      <aside>不要用原本預設的"逗號"，他會連中文大寫的逗號都一起分隔</aside>
+      <h2>最後! 檢查 & 填寫其他欄位(人工)</h2>
+
+      <p>稍微看一下有沒有問題，再填寫其他欄位</p>
+      <ul>
+        <li>連結</li>
+        <li>額滿: Y=有, N=無</li>
+        <li>系列課程: 文字填寫，月曆會用同一個顏色呈現，看活動細節時也可以一起看同系列課程</li>
+        <li>梯次: 1, 2, 3...</li>
+        <li>類別: 主觀分類</li>
+        <li>資訊來源: 從那邊看到的</li>
+      </article>
+    </main>
+  </body>
+</html>
